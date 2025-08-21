@@ -1,0 +1,595 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diseño y Belleza - Salón de Belleza</title>
+    <link rel="icon" href="public/image/Logo.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #ea6666 0%, #a24b4b 100%);
+        }
+        
+        .service-card {
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        .fade-in-delay-1 { animation-delay: 0.2s; }
+        .fade-in-delay-2 { animation-delay: 0.4s; }
+        .fade-in-delay-3 { animation-delay: 0.6s; }
+        .fade-in-delay-4 { animation-delay: 0.8s; }
+        .fade-in-delay-5 { animation-delay: 1s; }
+        .fade-in-delay-6 { animation-delay: 1.2s; }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: scale(1.2) rotate(5deg);
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+        
+        .whatsapp-float:hover {
+            background-color: #128c7e;
+            transform: scale(1.1);
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(106, 106, 110, 0.8), rgba(255, 0, 0, 0.8)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23667eea;stop-opacity:0.1" /><stop offset="100%" style="stop-color:%23764ba2;stop-opacity:0.1" /></linearGradient></defs><rect width="100%" height="100%" fill="url(%23grad)"/></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .btn-appointment {
+            background: linear-gradient(45deg, #ff0000, #3f3e3f);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-appointment:hover {
+            background: linear-gradient(45deg, #525252, #a7aab4);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(110, 121, 143, 0.3);
+        }
+        
+        .schedule-item {
+            transition: all 0.3s ease;
+        }
+        
+        .schedule-item:hover {
+            background-color: #f8fafc;
+            border-left: 4px solid #5c5c5d;
+            padding-left: 16px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/5632444747?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20en%20Diseño%20y%20Belleza" 
+       class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp mt-4"></i>
+    </a>
+
+<!-- Header -->
+<header class="bg-white shadow-lg sticky top-0 z-50">
+  <nav class="container mx-auto px-6 py-4 relative">
+    <!-- Contenedor superior -->
+    <div class="flex justify-between items-center">
+      <!-- Logo -->
+      <div class="text-2xl font-bold text-red-700 flex items-center">
+        <i class="fas fa-cut mr-2"></i>Diseño y Belleza
+      </div>
+
+      <!-- Botón hamburguesa -->
+      <button 
+        class="md:hidden text-gray-700" 
+        aria-label="Abrir menú" 
+        onclick="document.getElementById('menu').classList.toggle('hidden')">
+        <i class="fas fa-bars text-xl"></i>
+      </button>
+
+      <!-- Menú escritorio -->
+      <div class="hidden md:flex space-x-8">
+        <a href="#inicio" class="text-gray-700 hover:text-red-600">Inicio</a>
+        <a href="#servicios" class="text-gray-700 hover:text-red-600">Servicios</a>
+        <a href="#horarios" class="text-gray-700 hover:text-red-600">Horarios</a>
+        <a href="#contacto" class="text-gray-700 hover:text-red-600">Contacto</a>
+      </div>
+    </div>
+
+<!-- Menú móvil -->
+<div id="menu" class="hidden flex-col space-y-4 absolute left-0 top-full w-full bg-white shadow-lg md:hidden">
+  <a href="#inicio" class="block px-6 py-2 text-gray-700 hover:bg-red-200">Inicio</a>
+  <a href="#servicios" class="block px-6 py-2 text-gray-700 hover:bg-red-100">Servicios</a>
+  <a href="#horarios" class="block px-6 py-2 text-gray-700 hover:bg-red-100">Horarios</a>
+  <a href="#contacto" class="block px-6 py-2 text-gray-700 hover:bg-red-100">Contacto</a>
+</div>
+  </nav>
+</header>
+
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-section min-h-screen flex items-center justify-center text-white">
+        <div class="container mx-auto px-6 text-center">
+            <div class="fade-in">
+                <img src="public/image/Portada.jpeg"Elegant beauty salon interior with modern styling chairs, large mirrors with Hollywood lighting, and a sophisticated purple and white color scheme" class="mx-auto mb-8 rounded-lg shadow-2xl floating">
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 fade-in fade-in-delay-1">
+                Diseño y Belleza
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 fade-in fade-in-delay-2">
+                Tu belleza es nuestro arte
+            </p>
+            <p class="text-lg mb-12 max-w-2xl mx-auto fade-in fade-in-delay-3">
+                Descubre la experiencia única en nuestro salón de belleza, donde cada servicio está diseñado para realzar tu belleza natural con técnicas profesionales y productos de alta calidad.
+            </p>
+            <a href="#servicios" class="btn-appointment text-white px-8 py-4 rounded-full text-lg font-semibold inline-block fade-in fade-in-delay-4">
+                Conoce Nuestros Servicios
+            </a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4 fade-in">
+                    Nuestros Servicios
+                </h2>
+                <p class="text-xl text-gray-600 fade-in fade-in-delay-1">
+                    Servicios profesionales para realzar tu belleza
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1: Cortes de Cabello -->
+                <div class="service-card bg-white rounded-xl shadow-lg p-8 text-center fade-in">
+                    <div class="mb-6">
+                        <img src="public/image/Cabello.jpeg" alt="Professional hair cutting service showing a skilled stylist cutting a client's hair with precision scissors in a modern salon setting" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <i class="fas fa-cut text-4xl text-red-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Cortes de Cabello</h3>
+                    <p class="text-gray-600 mb-6">Cortes modernos y clásicos adaptados a tu estilo personal y forma de rostro.</p>
+                    <div class="text-red-600 font-bold text-xl">Desde $100 MXN</div>
+                </div>
+
+                <!-- Service 2: Balayage -->
+                <div class="service-card bg-white rounded-xl shadow-lg p-8 text-center fade-in fade-in-delay-1">
+                    <div class="mb-6">
+                        <img src="public/image/Bayalage.jpeg" alt="Beautiful balayage hair coloring technique being applied by a professional colorist creating natural-looking highlights with a brush" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <i class="fas fa-palette text-4xl text-gray-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Balayage</h3>
+                    <p class="text-gray-600 mb-6">Técnica de coloración que crea efectos naturales de luces y sombras en tu cabello.</p>
+                    <div class="text-gray-600 font-bold text-xl">Desde $1000 MXN</div>
+                </div>
+
+                <!-- Service 3: Efecto de Color -->
+                <div class="service-card bg-white rounded-xl shadow-lg p-8 text-center fade-in fade-in-delay-2">
+                    <div class="mb-6">
+                        <img src="public/image/Efecto de color.jpeg" alt="Hair color transformation showing vibrant color effects and creative hair coloring techniques with multiple color swatches" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <i class="fas fa-tint text-4xl text-red-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Efecto de Color</h3>
+                    <p class="text-gray-600 mb-6">Transformaciones completas de color para un cambio radical y llamativo.</p>
+                    <div class="text-red-600 font-bold text-xl">Desde $800 MXN</div>
+                </div>
+
+                <!-- Service 4: Pedicure -->
+                <div class="service-card bg-white rounded-xl shadow-lg p-8 text-center fade-in fade-in-delay-3">
+                    <div class="mb-6">
+                        <img src="public/image/Pedicure.jpeg" alt="Luxurious nail spa treatment showing perfectly manicured hands and feet with elegant nail art and professional pedicure setup" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <i class="fas fa-hand-sparkles text-4xl text-gray-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Pedicure</h3>
+                    <p class="text-gray-600 mb-6">Cuidado completo de pies con diseños únicos y productos de calidad.</p>
+                    <div class="text-gray-600 font-bold text-xl">Desde $300 MXN</div>
+                </div>
+
+                <!-- Service 5: Tinte -->
+                <div class="service-card bg-white rounded-xl shadow-lg p-8 text-center fade-in fade-in-delay-4">
+                    <div class="mb-6">
+                        <img src="public/image/Tinte.jpeg" alt="Professional hair dyeing process showing hair color application with professional tools and color mixing in a modern salon" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <i class="fas fa-brush text-4xl text-red-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Tinte</h3>
+                    <p class="text-gray-600 mb-6">Coloración uniforme y duradera con productos premium que cuidan tu cabello.</p>
+                    <div class="text-red-600 font-bold text-xl">Desde $500 MXN</div>
+                </div>
+
+                <!-- Service 6: Bioplastia y Botox -->
+                <div class="service-card bg-white rounded-xl shadow-lg p-8 text-center fade-in fade-in-delay-5">
+                    <div class="mb-6">
+                        <img src="public/image/Tratamiento.jpg" alt="Advanced hair treatment showing bioplasty and botox hair therapy application for hair reconstruction and smoothing in a professional setting" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <i class="fas fa-spa text-4xl text-gray-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Bioplastia y Botox</h3>
+                    <p class="text-gray-600 mb-6">Tratamientos reconstructivos avanzados para reparar y alisar el cabello.</p>
+                    <div class="text-gray-600 font-bold text-xl">Desde $700 MXN</div>
+                </div>
+                
+                <!-- Service 7: manicure -->
+                <div class="service-card bg-white rounded-xl shadow-lg p-8 text-center fade-in fade-in-delay-4">
+                    <div class="mb-6">
+                        <img src="public/image/Manicure.jpeg" alt="Professional hair dyeing process showing hair color application with professional tools and color mixing in a modern salon" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <i class="fas fa-hand-sparkles text-4xl text-red-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Manicure</h3>
+                    <p class="text-gray-600 mb-6">Cuidado completo de tus manos con esmaltes y diseños de calidad.</p>
+                    <div class="text-red-600 font-bold text-xl">Desde $150 MXN</div>
+                </div>
+
+                <!-- Service 8: Maquillaje -->
+                <div class="service-card bg-white rounded-xl shadow-lg p-8 text-center fade-in fade-in-delay-4">
+                    <div class="mb-6">
+                        <img src="public/image/Maquillaje.jpeg" alt="Professional hair dyeing process showing hair color application with professional tools and color mixing in a modern salon" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <i class="fas fa-brush text-4xl text-gray-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Maquillaje</h3>
+                    <p class="text-gray-600 mb-6">Aplicación profesional que resalta tu belleza natural con productos premium.</p>
+                    <div class="text-red-600 font-bold text-xl">Desde $600 MXN</div>
+                </div>
+
+                <!-- Service 9: Peinados -->
+                <div class="service-card bg-white rounded-xl shadow-lg p-8 text-center fade-in fade-in-delay-4">
+                    <div class="mb-6">
+                        <img src="public/image/Peinado.jpeg" alt="Professional hair dyeing process showing hair color application with professional tools and color mixing in a modern salon" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <i class="fas fa-cut text-4xl text-red-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Peinados</h3>
+                    <p class="text-gray-600 mb-6">Estilizado elegante y duradero para cualquier ocasión especial.</p>
+                    <div class="text-red-600 font-bold text-xl">Desde $300 MXN</div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="https://wa.me/5632444747?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20en%20Diseño%20y%20Belleza" 
+                   class="btn-appointment text-white px-10 py-4 rounded-full text-lg font-semibold inline-block pulse-slow" 
+                   target="_blank">
+                    <i class="fab fa-whatsapp mr-2"></i>Agendar Cita
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section id="horarios" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+                    Horarios de Atención
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Estamos aquí para ti cuando nos necesites
+                </p>
+            </div>
+            
+            <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-8">
+                <div class="space-y-4">
+                    <div class="schedule-item flex justify-between items-center py-4 border-b border-gray-200">
+                        <span class="font-semibold text-gray-800">Lunes - Viernes</span>
+                        <span class="text-blue-600 font-medium">10:30 AM - 8:15 PM</span>
+                    </div>
+                    <div class="schedule-item flex justify-between items-center py-4 border-b border-gray-200">
+                        <span class="font-semibold text-gray-800">Sábados</span>
+                        <span class="text-blue-600 font-medium">10:00 AM - 9:00 PM</span>
+                    </div>
+                    <div class="schedule-item flex justify-between items-center py-4 border-b border-gray-200">
+                        <span class="font-semibold text-gray-800">Domingos</span>
+                        <span class="text-blue-600 font-medium">12:00 AM - 4:30 PM</span>
+                    </div>
+                    <div class="schedule-item flex justify-between items-center py-4">
+                        <span class="font-semibold text-gray-800">Días Festivos</span>
+                        <span class="text-red-500 font-medium">Cerrado</span>
+                    </div>
+                </div>
+                
+                <div class="mt-8 p-4 bg-purple-50 rounded-lg">
+                    <p class="text-sm text-gray-600 text-center">
+                        <i class="fas fa-info-circle mr-2 text-red-600"></i>
+                        Se recomienda agendar cita previa para garantizar disponibilidad
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+                    Contáctanos
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Estamos aquí para atenderte y responder todas tus preguntas
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Information -->
+                <div class="space-y-8">
+                    <div class="bg-gray-50 p-6 rounded-xl">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-6">Información de Contacto</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt text-red-600 text-xl w-8"></i>
+                                <span class="text-gray-700">Av. John F. Kennedy 134, El Chamizal, 55270 Ecatepec de Morelos, Méx.</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-phone text-red-600 text-xl w-8"></i>
+                                <span class="text-gray-700">5632444747</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-envelope text-red-600 text-xl w-8"></i>
+                                <span class="text-gray-700">diseybelleza0@gmail.com</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Media -->
+                    <div class="bg-gradient-to-r from-red-500 to-gray-500 p-6 rounded-xl text-white">
+                        <h3 class="text-2xl font-semibold mb-6">Síguenos en Redes Sociales</h3>
+                        <div class="flex space-x-4">
+                            <a href="https://wa.me/5632444747?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20en%20Diseño%20y%20Belleza" target="_blank" class="social-icon bg-white text-green-500 w-12 h-12 rounded-full flex items-center justify-center">
+                                <i class="fab fa-whatsapp text-xl"></i>
+                            </a>
+                            <a href="https://www.instagram.com/diseybelleza" target="_blank" class="social-icon bg-white text-pink-500 w-12 h-12 rounded-full flex items-center justify-center">
+                                <i class="fab fa-instagram text-xl"></i>
+                            </a>
+                            <a href="https://www.facebook.com/Disenoybelleza" target="_blank" class="social-icon bg-white text-blue-600 w-12 h-12 rounded-full flex items-center justify-center">
+                                <i class="fab fa-facebook text-xl"></i>
+                            </a>
+                            <a href="https://www.tiktok.com/@disenoybelleza?lang=es-419" target="_blank" class="social-icon bg-white text-black w-12 h-12 rounded-full flex items-center justify-center">
+                                <i class="fab fa-tiktok text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Appointment Button -->
+                    <div class="text-center">
+                        <a href="https://wa.me/5632444747?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20en%20Diseño%20y%20Belleza" 
+                           class="btn-appointment text-white px-12 py-4 rounded-full text-xl font-semibold inline-block"
+                           target="_blank">
+                            <i class="fab fa-whatsapp mr-3"></i>Agendar Cita por WhatsApp
+                        </a>
+                    </div>
+                </div>
+                
+ <!-- Map - Embedded Google Maps -->
+<div class="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+    <div class="w-full aspect-[16/9] relative">
+        <!-- Embedded Google Maps Iframe -->
+        <!-- Mapa de Google -->
+<div class="w-full h-[500px] rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+    <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d768.1484770225048!2d-99.05675954733151!3d19.497799656582888!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fb983f375fed%3A0xb5177fd2c13d9f72!2zRGlzZcOxw7MgeSBiZWxsZXph!5e0!3m2!1ses!2smx!4v1755275856742!5m2!1ses!2smx"
+        class="w-full h-full border-0"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Ubicación en Google Maps">
+    </iframe>
+</div>
+
+        <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 pointer-events-none">
+            <div class="text-center p-4 backdrop-blur-sm rounded-lg">
+                <div class="bg-red-600/90 text-white p-4 rounded-lg animate-pulse-slow">
+                    <i class="fas fa-map-marker-alt text-4xl mb-3"></i>
+                    <h4 class="text-xl font-bold">Diseño y Belleza</h4>
+                    <p class="text-sm">Av. John F. Kennedy 134, El Chamizal, 55270 Ecatepec de Morelos, Méx.</p>
+                    <a href="https://maps.google.com/?q=Diseño+y+Belleza+Calle+Principal+123"
+                       target="_blank"
+                       class="mt-3 inline-block bg-white text-purple-600 hover:text-white hover:bg-purple-700 px-6 py-2 rounded-full transition-all duration-300 pointer-events-auto">
+                        Ver más grande
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Footer -->
+    <footer class="bg-red-800 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">
+                        <i class="fas fa-cut mr-2"></i>Diseño y Belleza
+                    </h3>
+                    <p class="text-gray-300">
+                        Tu salón de belleza de confianza donde cada servicio es una obra de arte dedicada a realzar tu belleza natural.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-semibold mb-4">Servicios</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li>Cortes de Cabello</li>
+                        <li>Balayage</li>
+                        <li>Efecto de Color</li>
+                        <li>Pedicure y Manicure</li>
+                        <li>Tinte</li>
+                        <li>Bioplastia y Botox</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-semibold mb-4">Contacto</h4>
+                    <div class="space-y-2 text-gray-300">
+                        <p><i class="fas fa-map-marker-alt mr-2"></i>Av. John F. Kennedy 134, El Chamizal, 55270 Ecatepec de Morelos, Méx.</p>
+                        <p><i class="fas fa-phone mr-2"></i>5632444747</p>
+                        <p><i class="fas fa-envelope mr-2"></i>diseybelleza0@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-400">
+                    © 2025 Diseño y Belleza. Todos los derechos reservados.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.classList.add('bg-white', 'shadow-lg');
+            } else {
+                header.classList.remove('shadow-lg');
+            }
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with fade-in class
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Service cards hover effect enhancement
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('.md\\:hidden button');
+        const mobileMenu = document.querySelector('.md\\:flex');
+        
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', function() {
+                // Toggle mobile menu visibility
+                console.log('Mobile menu clicked');
+            });
+        }
+
+        // Add loading animation to appointment buttons
+        document.querySelectorAll('.btn-appointment').forEach(button => {
+            button.addEventListener('click', function() {
+                const originalText = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Conectando...';
+                
+                setTimeout(() => {
+                    this.innerHTML = originalText;
+                }, 1500);
+            });
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.hero-section');
+            const speed = scrolled * 0.5;
+            
+            if (parallax) {
+                parallax.style.backgroundPosition = `center ${speed}px`;
+            }
+        });
+
+        // Add pulse animation to WhatsApp float button
+        const whatsappFloat = document.querySelector('.whatsapp-float');
+        if (whatsappFloat) {
+            setInterval(() => {
+                whatsappFloat.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    whatsappFloat.style.transform = 'scale(1)';
+                }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
+
